@@ -15,7 +15,6 @@ class Actor {
     String bio
     String imagePath
 
-
     static constraints = {
         firstName(nullable: false, minSize: 3, maxSize: 20)
         lastName(nullable: false, minSize: 3, maxSize: 20)
