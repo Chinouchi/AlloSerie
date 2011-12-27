@@ -16,6 +16,6 @@ class User {
       age(nullable: false , max: (short)105, min:  (short)5)
       logging(nullable: false , maxSize: 20, minSize: 5, unique: true)
       password(nullable: false, minSize: 6)
-      userType(inList: ["Admin", "User"])
+      userType inList: ["Admin", "User"]
     }
 }

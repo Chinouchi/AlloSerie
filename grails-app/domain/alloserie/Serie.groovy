@@ -20,7 +20,7 @@ class Serie {
         description(nullable: true , maxSize: 1500)
         rating(nullable: true, min : (short)0, max: (short)5)
         imagePath(nullable: true)
-        genre()
+        //genre( inList: ["Comedie", "Policiere", "Dramatique", "Science-Fiction", "Fantaisie" , "Ado"])
     }
 
 }
