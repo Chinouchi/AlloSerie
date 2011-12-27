@@ -5,24 +5,27 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         redirect(action: "list", params: params)
     }
 
     def list = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
-    }
-
-    def create = {
-        def userInstance = new User()
-        userInstance.properties = params
-        return [userInstance: userInstance]
     }
 
     def save = {
         def userInstance = new User(params)
         if (userInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
+            flash.message = "L'utilisateur a bien été créé."
+            session.setAttribute("id", userInstance.id);
             redirect(action: "show", id: userInstance.id)
         }
         else {
@@ -30,11 +33,38 @@ class UserController {
         }
     }
 
-    def signin = {
+    def signup = {
+        def userInstance = new User()
+        userInstance.properties = params
+        return [userInstance: userInstance]
+    }
 
+    def signin = {
+        def userInstance = new User()
+        userInstance.properties = params
+        return [userInstance: userInstance]
+    }
+
+    def checkSignIn = {
+        def userInstance = new User(params)
+        def dbUser = User.find(userInstance)
+        if(dbUser != null)
+        {
+            userInstance = User.find(userInstance)
+            session.setAttribute("id", userInstance.id)
+            redirect(action: index, params: params)
+        }
+        else
+        {
+            flash.message = "Les identifiants rentrés sont incorrects"
+        }
     }
 
     def show = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         def userInstance = User.get(params.id)
         if (!userInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -46,6 +76,10 @@ class UserController {
     }
 
     def edit = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         def userInstance = User.get(params.id)
         if (!userInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
@@ -57,6 +91,10 @@ class UserController {
     }
 
     def update = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         def userInstance = User.get(params.id)
         if (userInstance) {
             if (params.version) {
@@ -84,6 +122,10 @@ class UserController {
     }
 
     def delete = {
+        if(session.getAttribute("id") == null)
+        {
+            redirect(action:"signin", params: params)
+        }
         def userInstance = User.get(params.id)
         if (userInstance) {
             try {

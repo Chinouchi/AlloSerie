@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title>Sign Up</title>
     </head>
     <body>
         <div class="body">
@@ -52,10 +52,10 @@
 
                         <tr class="prop">
                             <td valign="top" class="name">
-                                <label for="logging"><g:message code="user.logging.label" default="Logging"/></label>
+                                <label for="login"><g:message code="user.login.label" default="Login"/></label>
                             </td>
-                            <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'logging', 'errors')}">
-                                <g:textField name="logging" maxlength="20" value="${userInstance?.logging}"/>
+                            <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'login', 'errors')}">
+                                <g:textField name="login" maxlength="20" value="${userInstance?.login}"/>
                             </td>
                         </tr>
 
@@ -64,7 +64,7 @@
                                 <label for="password"><g:message code="user.password.label" default="Password"/></label>
                             </td>
                             <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
-                                <g:textField name="password" value="${userInstance?.password}"/>
+                                <g:passwordField name="password" value="${userInstance?.password}"/>
                             </td>
                         </tr>
 
