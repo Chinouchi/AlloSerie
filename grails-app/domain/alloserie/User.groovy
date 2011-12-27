@@ -9,6 +9,7 @@ class User {
     String password
     String userType
 
+
     static constraints = {
       firstName(blank:false , maxSize: 20, nullable: false )
       lastName(blank:false , maxSize: 20, nullable: false)
