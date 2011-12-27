@@ -11,7 +11,8 @@
         <div id="spinner" class="spinner" style="display:none;">
             <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Loading..." />
         </div>
-        <div id="banner"><img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="0" /></div>
+
+         <div id="banner"><img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="10"  /></div>
         <g:layoutBody />
     </body>
 </html>

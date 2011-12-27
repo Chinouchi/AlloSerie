@@ -15,6 +15,9 @@ body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
+    width: 1020px;
+    margin: auto;
+
 }
 #grailsLogo {
 	padding:20px;
@@ -68,8 +71,7 @@ input:focus, select:focus, textarea:focus {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
     border-style: solid none solid none;
-    margin-top: 5px;
-    padding: 7px 12px;
+    padding: 7px 12px 5px;
 }
 
 .menuButton {
