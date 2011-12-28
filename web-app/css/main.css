@@ -355,3 +355,24 @@ ul.tabs a.xl.current { background-position: 0 -62px; }
 	display:none;
 }
 
+#fieldtv {
+    position: relative;
+    width: 100%;
+}
+
+#news {
+   min-height: 100px;
+}
+#toptv {
+    position: absolute;
+    width: 48%;
+    left: 0;
+    min-height: 100px;
+}
+#todaytv
+{
+   position: absolute;
+    width: 48%;
+    right: 0;
+    min-height: 100px;
+}
