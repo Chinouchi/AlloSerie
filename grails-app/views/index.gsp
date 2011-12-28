@@ -15,36 +15,38 @@
            </g:if>
         </ul>
 
-        <!-- tab "panes" -->
+       <!-- onglets contenue 1 -->
         <div class="panes">
             <div>
-            <fieldset id="news" title="News" > <legend>News :</legend></fieldset>
-            <div id="fieldtv">
-            <fieldset id="toptv" title="Top TV Shows" > <legend>Top TV Shows :</legend></fieldset>
-            <fieldset id="todaytv"title="Today Show" > <legend>Today Show :</legend></fieldset>
+                <fieldset id="news" title="News" > <legend>News :</legend></fieldset>
+                <div id="fieldtv">
+                    <fieldset id="toptv" title="Top TV Shows" > <legend>Top TV Shows :</legend></fieldset>
+                    <fieldset id="todaytv"title="Today Show" > <legend>Today Show :</legend></fieldset>
+                </div>
+	        </div>
+
+        <!-- onglets contenue 2-->
+            <div id="Seriesdiv">
+                <g:each in="${Serie.findAll()}">
+                    <table class="Series">
+                          <thead >
+                            <th colspan="2"><a href="serie/show/${it.id}"> ${it.name}</a></th>
+
+                           </thead>
+                        <tbody>
+                            <tr>
+                                <td width="15%"><img src="${resource(dir:"images", file:it.imagePath)}" alt=""></td>
+                                    <td>
+                                    <spam>${it.genre}</spam><br />
+                                    <spam>${it.rating}</spam>  <br />
+                                    <spam>${it.description}</spam>   <br />
+                                      </td>
+                            </tr>
+                         </tbody>
+                    </table>
+                </g:each>
+
             </div>
-	    </div>
-	    <div>
-            <g:each in="${Serie.findAll()}">
-                <table class="Series">
-                      <thead >
-                        <th colspan="2">${it.name}</th>
-
-                       </thead>
-                    <tbody>
-                        <tr>
-                            <td width="15%"><img src="${resource(dir:"images", file:it.imagePath)}" alt=""></td>
-                                <td>
-                                <spam>${it.genre}</spam><br />
-                                <spam>${it.rating}</spam>  <br />
-                                <spam>${it.description}</spam>   <br />
-                                  </td>
-                        </tr>
-                     </tbody>
-                </table>
-            </g:each>
-
-	    </div>
             <g:if test="${session.getAttribute('user') != null}">
                 <div>
                     <fieldset id="addSerieFieldSet">
