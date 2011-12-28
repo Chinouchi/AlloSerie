@@ -47,17 +47,18 @@ class UserController {
 
     def checkSignIn = {
         def userInstance = new User(params)
-        def dbUser = User.find(userInstance)
+        def dbUser = User.findByLoginAndPassword(userInstance.login, userInstance.password)
         if(dbUser != null)
         {
-            userInstance = User.find(userInstance)
-            session.setAttribute("id", userInstance.id)
-            redirect(action: index, params: params)
+           session.setAttribute("user", dbUser)
+            render(view: "../index" , model: [userInstance: userInstance])
         }
         else
         {
             flash.message = "Les identifiants rentrés sont incorrects"
+            redirect(action: signin)
         }
+
     }
 
     def show = {
@@ -143,4 +144,9 @@ class UserController {
             redirect(action: "list")
         }
     }
+    def signout = {
+        session.removeAttribute('user')
+        render(view: "../index")
+    }
 }
+

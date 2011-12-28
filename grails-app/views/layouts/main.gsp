@@ -23,7 +23,14 @@
         <div id="spinner" class="spinner" style="display:none;">
             <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Loading..." />
         </div>
-        <div id="banner"><img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="0" /></div>
+        <div id="banner">
+            <g:if test="${session.getAttribute('user') != null}">
+            <div class="connexion_button"><g:link action="signout" controller="user">Se déconnecter</g:link></div></g:if>
+            <g:else>
+                <div class="connexion_button"><g:link action="signin" controller="user">Se connecter</g:link></div>
+            </g:else>
+            <img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="0" />
+        </div>
         <g:layoutBody />
 
     </body>

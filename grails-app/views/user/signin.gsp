@@ -19,7 +19,7 @@
                 <g:renderErrors bean="${userInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" >
+            <g:form action="checkSignIn" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -37,7 +37,7 @@
                                     <label for="password"><g:message code="user.password.label" default="Password" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
-                                    <g:textField  name="password" value="${userInstance?.password}" />
+                                    <g:passwordField  name="password" value="${userInstance?.password}" />
                                 </td>
                             </tr>
                         </tbody>
