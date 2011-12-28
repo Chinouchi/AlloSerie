@@ -5,7 +5,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }
@@ -13,7 +13,7 @@ class UserController {
     }
 
     def list = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }
@@ -25,7 +25,7 @@ class UserController {
         def userInstance = new User(params)
         if (userInstance.save(flush: true)) {
             flash.message = "L'utilisateur a bien été créé."
-            session.setAttribute("id", userInstance.id);
+            session.setAttribute("user", userInstance);
             redirect(action: "show", id: userInstance.id)
         }
         else {
@@ -61,7 +61,7 @@ class UserController {
     }
 
     def show = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }
@@ -76,7 +76,7 @@ class UserController {
     }
 
     def edit = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }
@@ -91,7 +91,7 @@ class UserController {
     }
 
     def update = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }
@@ -122,7 +122,7 @@ class UserController {
     }
 
     def delete = {
-        if(session.getAttribute("id") == null)
+        if(session.getAttribute("user") == null)
         {
             redirect(action:"signin", params: params)
         }

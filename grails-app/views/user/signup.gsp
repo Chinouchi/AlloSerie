@@ -68,15 +68,6 @@
                             </td>
                         </tr>
 
-                        <tr class="prop">
-                            <td valign="top" class="name">
-                                <label for="userType"><g:message code="user.userType.label" default="User Type"/></label>
-                            </td>
-                            <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'userType', 'errors')}">
-                                <g:select name="userType" from="${userInstance.constraints.userType.inList}"
-                                          value="${userInstance?.userType}" valueMessagePrefix="user.userType"/>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>

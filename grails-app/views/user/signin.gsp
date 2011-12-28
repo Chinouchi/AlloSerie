@@ -45,6 +45,7 @@
                 </div>
                 <div class="buttons">
                     <span class="button"><g:submitButton name="create" class="save" value="Connexion" /></span>
+                    <span><g:link action="signup" title="Créer un compte">Créer un compte</g:link> </span>
                 </div>
             </g:form>
         </div>

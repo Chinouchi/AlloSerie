@@ -376,3 +376,13 @@ ul.tabs a.xl.current { background-position: 0 -62px; }
     right: 0;
     min-height: 100px;
 }
+
+#addSerieFieldSet
+{
+    width:50%;
+}
+
+#editSerieFieldSet
+{
+    width:50%;
+}
