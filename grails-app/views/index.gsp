@@ -1,4 +1,4 @@
-<%@ page import="alloserie.Serie" %>
+<%@ page import="alloserie.Actor; alloserie.Serie" %>
 <html>
     <head>
         <title>Welcome to AlloSeries</title>
@@ -9,7 +9,7 @@
        <ul class="tabs">
             <li><a href="#">Accueil</a></li>
             <li><a href="#">Series</a></li>
-
+            <li><a href="#">Acteurs</a></li>
            <g:if test="${session.getAttribute('user') != null}">
                <li><a href="#">Administration</a></li>
            </g:if>
@@ -27,29 +27,57 @@
 
         <!-- onglets contenue 2-->
             <div id="Seriesdiv">
-                <g:each var="currentserie" in="${Serie.findAll()}">
+                <g:each in="${Serie.findAll()}" var="currentSerie">
                     <table class="Series">
                           <thead >
-                            <th colspan="2"><g:link controller="serie" action="display" id="${currentserie.id}"> ${currentserie.name}</g:link></th>
+                            <th colspan="2"><a href="serie/display/${currentSerie.id}"> ${currentSerie.name}</a></th>
 
                            </thead>
                         <tbody>
                             <tr>
-                                <td width="15%"><img src="${resource(dir:"images", file:currentserie.imagePath)}" alt=""></td>
+                                <td width="15%"><img src="${resource(dir:"images", file:currentSerie.imagePath)}" alt=""></td>
                                     <td>
-                                    <spam>${currentserie.genre}</spam><br />
-                                    <spam>${currentserie.rating}</spam>  <br />
-                                   <g:if test="${currentserie.description.length() > 200}">
-                                       <spam>${currentserie.description.substring(0,200)} ... </spam>
+                                    <span>${currentSerie.genre}</span><br />
+                                    <span>${currentSerie.rating}</span>  <br />
+                                   <g:if test="${currentSerie.description.length() > 200}">
+                                       <span>${currentSerie.description.substring(0,200)} ... </span>
                                     </g:if>
                                     <g:else>
-                                        <spam>${currentserie.description} </spam>
+                                        <span>${currentSerie.description} </span>
                                     </g:else>
+                                    </td>
+                            </tr>
                          </tbody>
                     </table>
                 </g:each>
-
             </div>
+
+            <div id="Acteursdiv">
+                <g:each in="${Actor.findAll()}" var="currentActor">
+                    <table class="Acteurs">
+                          <thead >
+                            <th colspan="2"><a href="actor/show/${currentActor.id}"> ${currentActor.fullName}</a></th>
+                           </thead>
+                        <tbody>
+                            <tr>
+                                <td width="15%"><img src="${resource(dir:"images", file:currentActor.imagePath)}" alt=""></td>
+                                    <td>
+                                        <span>Prénom : ${currentActor.firstName}</span><br />
+                                        <span>Nom : ${currentActor.lastName}</span><br />
+                                        <span>Date de naissance : ${currentActor.birthDate.toLocaleString()}</span><br />
+                                        <g:if test="${currentActor.bio.length() > 200}">
+                                           <span>${currentActor.bio.substring(0,200)} ... </span>
+                                        </g:if>
+                                        <g:else>
+                                            <span>${currentActor.bio}</span>
+                                        </g:else>
+                                    </td>
+                            </tr>
+                         </tbody>
+                    </table>
+                </g:each>
+            </div>
+
             <g:if test="${session.getAttribute('user') != null}">
                 <div>
                     <fieldset id="addSerieFieldSet">

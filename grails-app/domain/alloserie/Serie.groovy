@@ -1,5 +1,6 @@
 package alloserie
 
+
 /**
  * Created by IntelliJ IDEA.
  * User: Rwave
@@ -8,13 +9,13 @@ package alloserie
  * To change this template use File | Settings | File Templates.
  */
 class Serie {
+    static hasMany = [actors: Actor]
 
     String name
     String genre
     String description
     short rating
     String imagePath
-
 
     static constraints = {
         name(nullable: false, minSize: 2)

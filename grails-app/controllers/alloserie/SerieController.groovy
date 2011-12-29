@@ -20,7 +20,6 @@ class SerieController {
         }
         else {
             [serieInstance: serieInstance]
-            render(view: "display" , model: [serieInstance: serieInstance])
         }
     }
 
@@ -49,17 +48,6 @@ class SerieController {
         }
         else {
             render(view: "create", model: [serieInstance: serieInstance])
-        }
-    }
-
-    def show = {
-        def serieInstance = Serie.get(params.id)
-        if (!serieInstance) {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [serieInstance: serieInstance]
         }
     }
 
