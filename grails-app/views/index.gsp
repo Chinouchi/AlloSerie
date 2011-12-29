@@ -27,21 +27,24 @@
 
         <!-- onglets contenue 2-->
             <div id="Seriesdiv">
-                <g:each in="${Serie.findAll()}">
+                <g:each var="currentserie" in="${Serie.findAll()}">
                     <table class="Series">
                           <thead >
-                            <th colspan="2"><a href="serie/show/${it.id}"> ${it.name}</a></th>
+                            <th colspan="2"><g:link controller="serie" action="display" id="${currentserie.id}"> ${currentserie.name}</g:link></th>
 
                            </thead>
                         <tbody>
                             <tr>
-                                <td width="15%"><img src="${resource(dir:"images", file:it.imagePath)}" alt=""></td>
+                                <td width="15%"><img src="${resource(dir:"images", file:currentserie.imagePath)}" alt=""></td>
                                     <td>
-                                    <spam>${it.genre}</spam><br />
-                                    <spam>${it.rating}</spam>  <br />
-                                    <spam>${it.description}</spam>   <br />
-                                      </td>
-                            </tr>
+                                    <spam>${currentserie.genre}</spam><br />
+                                    <spam>${currentserie.rating}</spam>  <br />
+                                   <g:if test="${currentserie.description.length() > 200}">
+                                       <spam>${currentserie.description.substring(0,200)} ... </spam>
+                                    </g:if>
+                                    <g:else>
+                                        <spam>${currentserie.description} </spam>
+                                    </g:else>
                          </tbody>
                     </table>
                 </g:each>

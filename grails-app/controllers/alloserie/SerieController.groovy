@@ -12,6 +12,18 @@ class SerieController {
         redirect(action: "list", params: params)
     }
 
+    def display = {
+      def serieInstance = Serie.get(params.id)
+        if (!serieInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
+            redirect(url: "../index")
+        }
+        else {
+            [serieInstance: serieInstance]
+            render(view: "display" , model: [serieInstance: serieInstance])
+        }
+    }
+
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [serieInstanceList: Serie.list(params), serieInstanceTotal: Serie.count()]

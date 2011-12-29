@@ -18,7 +18,7 @@ class Serie {
 
     static constraints = {
         name(nullable: false, minSize: 2)
-        description(nullable: true , maxSize: 1500)
+        description(nullable: true , maxSize: 15000)
         rating(nullable: true, min : (short)0, max: (short)5)
         imagePath(nullable: true)
         //genre( inList: ["Comedie", "Policiere", "Dramatique", "Science-Fiction", "Fantaisie" , "Ado"])

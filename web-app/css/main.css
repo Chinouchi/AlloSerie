@@ -12,7 +12,7 @@ html * {
 }
 
 body {
-    background: #fff;
+    background: #aaaaaa;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
     width: 1020px;
@@ -382,7 +382,11 @@ ul.tabs a.xl.current { background-position: 0 -62px; }
     max-width: 150px;
     max-height: 150px;
 }
-
+.Seriesalone img
+{
+    max-width: 250px   ;
+    max-height: 250px;
+}
 #addSerieFieldSet
 {
     width:50%;
