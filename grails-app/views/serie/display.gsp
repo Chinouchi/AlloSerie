@@ -17,7 +17,7 @@
     </ul>
     <div class="panes">
         <div>
-            <table class="Seriesalone">
+            <table class="serieAlone">
                 <thead >
                    <th colspan="2"> ${serieInstance?.name}</th>
                 </thead>
@@ -35,9 +35,9 @@
         </div>
         <div>
             <g:each in="${serieInstance?.actors}" var="currentActor">
-                <table class="Acteurs">
+                <table class="acteurs">
                     <thead >
-                        <th colspan="2"><a href="actor/show/${currentActor.id}"> ${currentActor.fullName}</a></th>
+                        <th colspan="2"><a href="${createLink(controller:'actor', action:'show', id:currentActor.id)}">${currentActor.fullName}</a></th>
                     </thead>
                     <tbody>
                         <tr>
@@ -58,7 +58,68 @@
                 </table>
             </g:each>
         </div>
-        <div>add acteur</div>
+        <div>
+            <g:uploadForm method="post" >
+                <g:hiddenField name="id" value="${serieInstance?.id}" />
+                <g:hiddenField name="version" value="${serieInstance?.version}" />
+                <div class="dialog">
+                    <table>
+                        <tbody>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="name"><g:message code="serie.name.label" default="Name" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: serieInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${serieInstance?.name}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="description"><g:message code="serie.description.label" default="Description" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: serieInstance, field: 'description', 'errors')}">
+                                    <g:textArea name="description" cols="40" rows="5" value="${serieInstance?.description}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="rating"><g:message code="serie.rating.label" default="Rating" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: serieInstance, field: 'rating', 'errors')}">
+                                    <g:textField name="rating" value="${fieldValue(bean: serieInstance, field: 'rating')}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="actors"><g:message code="serie.actors.label" default="Actors" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: serieInstance, field: 'actors', 'errors')}">
+                                    <g:select name="actors" from="${alloserie.Actor.list()}" multiple="yes" optionKey="id" optionValue="fullName" size="5" value="${serieInstance?.actors*.id}" />
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="genre"><g:message code="serie.genre.label" default="Genre" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: serieInstance, field: 'genre', 'errors')}">
+                                    <g:textField name="genre" value="${serieInstance?.genre}" />
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </div>
+            </g:uploadForm>
+        </div>
     </div>
   </body>
 </html>

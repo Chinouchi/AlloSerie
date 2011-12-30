@@ -21,9 +21,10 @@ class Actor {
     public String getFullName(){return firstName + " " + lastName}
 
     static constraints = {
-        id()
         firstName(nullable: false, minSize: 3, maxSize: 20)
         lastName(nullable: false, minSize: 3, maxSize: 20)
+        bio(nullable : true, maxSize: 15000)
+        imagePath(nullable: true)
     }
 
 }

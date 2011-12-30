@@ -1,11 +1,14 @@
 package alloserie
 
+import org.springframework.web.multipart.MultipartHttpServletRequest
+import org.codehaus.groovy.grails.commons.GrailsResourceUtils
+
 class ActorController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(url:"../", params: params)
     }
 
     def list = {
@@ -21,6 +24,15 @@ class ActorController {
 
     def save = {
         def actorInstance = new Actor(params)
+
+        def downloadedFile = ((MultipartHttpServletRequest)request).getFile("image");
+        if(downloadedFile != null && downloadedFile.originalFilename != ""){
+
+            String newFileName = new Date().getTime() + downloadedFile.originalFilename;
+            downloadedFile.transferTo(new File(GrailsResourceUtils.WEB_APP_DIR + "/images/actors/" + newFileName))
+            actorInstance.imagePath = "actors/" + newFileName
+        }
+
         if (actorInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'actor.label', default: 'Actor'), actorInstance.id])}"
             redirect(action: "show", id: actorInstance.id)
@@ -34,7 +46,7 @@ class ActorController {
         def actorInstance = Actor.get(params.id)
         if (!actorInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "index")
         }
         else {
             [actorInstance: actorInstance]
@@ -94,7 +106,7 @@ class ActorController {
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "index")
         }
     }
 }

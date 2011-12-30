@@ -51,7 +51,7 @@ class UserController {
         if(dbUser != null)
         {
            session.setAttribute("user", dbUser)
-            render(view: "../index" , model: [userInstance: userInstance])
+           redirect(url : "../")
         }
         else
         {

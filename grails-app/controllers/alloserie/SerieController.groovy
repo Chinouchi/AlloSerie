@@ -1,7 +1,6 @@
 package alloserie
 
 import org.springframework.web.multipart.MultipartHttpServletRequest
-import org.springframework.util.ResourceUtils
 import org.codehaus.groovy.grails.commons.GrailsResourceUtils
 
 class SerieController {
@@ -9,14 +8,14 @@ class SerieController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(url: "../", params: params)
     }
 
     def display = {
       def serieInstance = Serie.get(params.id)
         if (!serieInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
-            redirect(url: "../index")
+            redirect(action: index)
         }
         else {
             [serieInstance: serieInstance]
@@ -37,12 +36,14 @@ class SerieController {
     def save = {
         def serieInstance = new Serie(params)
         def downloadedFile = ((MultipartHttpServletRequest)request).getFile("image");
-        if(downloadedFile != null && downloadedFile != ""){
-            downloadedFile.transferTo(new File(GrailsResourceUtils.WEB_APP_DIR + "/images/" + downloadedFile.originalFilename))
-            serieInstance.imagePath = downloadedFile.originalFilename
+        if(downloadedFile != null && downloadedFile.originalFilename != ""){
+
+            String newFileName = new Date().getTime() + downloadedFile.originalFilename;
+            downloadedFile.transferTo(new File(GrailsResourceUtils.WEB_APP_DIR + "/images/series/" + newFileName))
+            serieInstance.imagePath = "series/" + newFileName
         }
 
-        if (serieInstance.save(flush: true)) {
+        if (serieInstance.save(flush: true)){
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
             redirect(action: "show", id: serieInstance.id)
         }
@@ -77,7 +78,7 @@ class SerieController {
             serieInstance.properties = params
             if (!serieInstance.hasErrors() && serieInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
-                redirect(action: "show", id: serieInstance.id)
+                redirect(action: "display", id: serieInstance.id)
             }
             else {
                 render(view: "edit", model: [serieInstance: serieInstance])

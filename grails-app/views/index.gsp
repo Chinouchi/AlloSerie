@@ -26,9 +26,9 @@
 	        </div>
 
         <!-- onglets contenue 2-->
-            <div id="Seriesdiv">
+            <div>
                 <g:each in="${Serie.findAll()}" var="currentSerie">
-                    <table class="Series">
+                    <table class="series">
                           <thead >
                             <th colspan="2"><a href="serie/display/${currentSerie.id}"> ${currentSerie.name}</a></th>
 
@@ -37,8 +37,9 @@
                             <tr>
                                 <td width="15%"><img src="${resource(dir:"images", file:currentSerie.imagePath)}" alt=""></td>
                                     <td>
-                                    <span>${currentSerie.genre}</span><br />
-                                    <span>${currentSerie.rating}</span>  <br />
+                                    <span><strong>Genre(s) :</strong> ${currentSerie.genre}</span><br />
+                                    <span><strong>Notation :</strong> ${currentSerie.rating}</span><br />
+                                        <span><strong>Description :</strong></span>
                                    <g:if test="${currentSerie.description.length() > 200}">
                                        <span>${currentSerie.description.substring(0,200)} ... </span>
                                     </g:if>
@@ -52,19 +53,20 @@
                 </g:each>
             </div>
 
-            <div id="Acteursdiv">
+            <div>
                 <g:each in="${Actor.findAll()}" var="currentActor">
-                    <table class="Acteurs">
+                    <table class="acteurs">
                           <thead >
-                            <th colspan="2"><a href="actor/show/${currentActor.id}"> ${currentActor.fullName}</a></th>
+                            <th colspan="2"><a href="${createLink(controller: actor, action: show)}"> ${currentActor.fullName}</a></th>
                            </thead>
                         <tbody>
                             <tr>
                                 <td width="15%"><img src="${resource(dir:"images", file:currentActor.imagePath)}" alt=""></td>
                                     <td>
-                                        <span>Prénom : ${currentActor.firstName}</span><br />
-                                        <span>Nom : ${currentActor.lastName}</span><br />
-                                        <span>Date de naissance : ${currentActor.birthDate.toLocaleString()}</span><br />
+                                        <span><strong>Prénom :</strong> ${currentActor.firstName}</span><br />
+                                        <span><strong>Nom :</strong> ${currentActor.lastName}</span><br />
+                                        <span><strong>Date de naissance :</strong> ${currentActor.birthDate.toLocaleString()}</span><br />
+                                        <span><strong>Biographie :</strong></span><br/>
                                         <g:if test="${currentActor.bio.length() > 200}">
                                            <span>${currentActor.bio.substring(0,200)} ... </span>
                                         </g:if>
@@ -79,8 +81,8 @@
             </div>
 
             <g:if test="${session.getAttribute('user') != null}">
-                <div>
-                    <fieldset id="addSerieFieldSet">
+                <div id="administrationTab">
+                    <fieldset>
                        <legend>Ajouter une série</legend>
                        <g:uploadForm controller="serie" action="save" >
                             <div class="dialog">
@@ -143,8 +145,66 @@
                             </div>
                         </g:uploadForm>
                     </fieldset>
-                    <fieldset id="editSerieFieldSet">
-                       <legend>Editer une série</legend>
+                    <fieldset>
+                       <legend>Ajouter un auteur</legend>
+                        <g:uploadForm controller="actor" action="save" >
+                            <div class="dialog">
+                                <table>
+                                    <tbody>
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="firstName"><g:message code="actor.firstName.label" default="First Name" /></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: actorInstance, field: 'firstName', 'errors')}">
+                                                <g:textField name="firstName" maxlength="20" value="${actorInstance?.firstName}" />
+                                            </td>
+                                        </tr>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="lastName"><g:message code="actor.lastName.label" default="Last Name" /></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: actorInstance, field: 'lastName', 'errors')}">
+                                                <g:textField name="lastName" maxlength="20" value="${actorInstance?.lastName}" />
+                                            </td>
+                                        </tr>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="bio"><g:message code="actor.bio.label" default="Bio" /></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: actorInstance, field: 'bio', 'errors')}">
+                                                <g:textArea cols="40" rows="5" name="bio" value="${actorInstance?.bio}" />
+                                            </td>
+                                        </tr>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="birthDate"><g:message code="actor.birthDate.label" default="Birth Date" /></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: actorInstance, field: 'birthDate', 'errors')}">
+                                                <g:datePicker name="birthDate" precision="day" value="${actorInstance?.birthDate}"  />
+                                            </td>
+                                        </tr>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="actorImageField"><g:message code="actor.imagePath.label" default="Image Path" /></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: actorInstance, field: 'imagePath', 'errors')}">
+                                                 <input type="file" id="actorImageField" name="image" />
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="buttons">
+                                <span class="button"><g:submitButton name="create" class="save"
+                                                                     value="${message(code: 'default.button.create.label', default: 'Ajouter')}"/></span>
+                            </div>
+                        </g:uploadForm>
                     </fieldset>
                 </div>
             </g:if>
