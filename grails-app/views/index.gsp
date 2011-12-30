@@ -57,7 +57,7 @@
                 <g:each in="${Actor.findAll()}" var="currentActor">
                     <table class="acteurs">
                           <thead >
-                            <th colspan="2"><a href="${createLink(controller: actor, action: show)}"> ${currentActor.fullName}</a></th>
+                            <th colspan="2"><a href="${createLink(controller:'actor', action:'show', id:currentActor.id)}">${currentActor.fullName}</a></th>
                            </thead>
                         <tbody>
                             <tr>
