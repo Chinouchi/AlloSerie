@@ -3,6 +3,8 @@
     <head>
         <title>Welcome to AlloSeries</title>
         <meta name="layout" content="main" />
+        <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/scrollable-horizontal.css" />
+        <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/scrollable-buttons.css" />
 
     </head>
     <body>
@@ -18,48 +20,54 @@
 
        <!-- onglets contenue 1 -->
         <div class="panes">
+
             <div>
-                <fieldset id="news" title="News" > <legend>News :</legend></fieldset>
+               <fieldset id="news" title="News" > <legend>News :</legend></fieldset>
+                <fieldset id="toptv" title="News" > <legend>Top TV SHOW :</legend>
+                    <div id="test">
+                <!-- "previous page" action -->
+                <a class="prev browse left"></a>
 
-                    <fieldset id="toptv" title="Top TV Shows" > <legend>Top TV Shows :</legend>
-                         <div class="toptvscroll">
-                        <a class="prev browse left"></a>
+                <!-- root element for scrollable -->
+                <div class="scrollable" id=scroller>
 
-                                <!-- root element for scrollable -->
-                                <div class="scrollable">
+                   <!-- root element for the items -->
+                   <div class="items">
 
-                                   <!-- root element for the items -->
-                                   <div class="items">
-
-                                      <!-- 1-5 -->
-                                           <g:set var="i" value="0"/>
+                      <!-- 1-5 -->
+                       <g:set var="i" value="${0}"/>
                                            <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
+                                                <g:if test="${i == 5}">
+                                                   <g:set var="i" value="${0}"/>
+                                                   </div>
+
+                                               </g:if>
 
                                                <g:if test="${i == 0}">
-                                                 <div>
+                                                 <div class="test">
                                                </g:if>
-                                               <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
-                                               <g:set var="i" value="${i++}" />
 
-                                                <g:if test="${i == 5}">
-                                                <g:set var="i" value="0"/>
-                                               </div>
-                                                </g:if>
 
+                                               <g:link controller="serie" action="display" id="${bestSerie.id}">  <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt=""></g:link>
+
+                                               <g:set var="i" value="${i+1}" />
                                            </g:each>
-                                           <g:if test="${i != 5}">
-                                              </div>
-                                           </g:if>
+                                            <g:if test="${i != 5}">
+                                                <g:set var="i" value="${0}" />
+                                                </div>
+                                            </g:if>
 
-                                   </div>
-
-                                <!-- "next page" action -->
-                         <a class="next browse right"></a>
-                        </div>
-                    </fieldset>
+                   </div>
 
                 </div>
-        </div>
+
+                <!-- "next page" action -->
+                <a class="next browse right"></a>
+                    </div>
+                    </fieldset>
+
+            </div>
+
 
 
         <!-- onglets contenue 2-->
