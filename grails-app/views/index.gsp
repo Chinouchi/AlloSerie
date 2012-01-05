@@ -6,6 +6,7 @@
 
     </head>
     <body>
+
        <ul class="tabs">
             <li><a href="#">Accueil</a></li>
             <li><a href="#">Series</a></li>
@@ -31,24 +32,24 @@
                                    <div class="items">
 
                                       <!-- 1-5 -->
-                                                <% int i = 0%>
+                                           <%! int i = 0%>
                                            <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
 
-                                               <% if(i == 0){%>
-                                               <div>
-                                                          <% }%>
-                                                <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
- <% i ++   %>
+                                               <g:if test="{i == 0}">
+                                                 <div>
+                                               </g:if>
+                                               <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
+                                                <% i ++  %>
 
-                                                <% if(i == 5){
-                                                   i = 0%>
+                                                <g:if test="{i == 5}">
+                                                <% i = 0 %>
                                                </div>
-                                                          <% }%>
+                                                </g:if>
 
                                            </g:each>
-                                                 <% if(i!=5){%>
-                                                    </div>
-                                                <%}%>
+                                           <g:if test="{i != 5}">
+                                              </div>
+                                           </g:if>
 
                                    </div>
 
@@ -77,8 +78,8 @@
                                     <span><strong>Genre(s) :</strong> ${currentSerie.genre}</span><br />
                                     <span><strong>Notation :</strong> ${currentSerie.rating}</span><br />
                                         <span><strong>Description :</strong></span>
-                                   <g:if test="${currentSerie.description.length() > 200}">
-                                       <span>${currentSerie.description.substring(0,200)} ... </span>
+                                   <g:if test="${currentSerie.description?.length() > 200}">
+                                       <span>${currentSerie.description?.substring(0,200)} ... </span>
                                     </g:if>
                                     <g:else>
                                         <span>${currentSerie.description} </span>
@@ -94,7 +95,7 @@
                 <g:each in="${Actor.findAll()}" var="currentActor">
                     <table class="acteurs">
                           <thead >
-                            <th colspan="2"><a href="${createLink(controller:'actor', action:'show', id:currentActor.id)}">${currentActor.fullName}</a></th>
+                            <th colspan="2"><a href="${createLink(controller:'actor', action:'display', id:currentActor.id)}">${currentActor.fullName}</a></th>
                            </thead>
                         <tbody>
                             <tr>
@@ -104,8 +105,8 @@
                                         <span><strong>Nom :</strong> ${currentActor.lastName}</span><br />
                                         <span><strong>Date de naissance :</strong> ${currentActor.birthDate.toLocaleString()}</span><br />
                                         <span><strong>Biographie :</strong></span><br/>
-                                        <g:if test="${currentActor.bio.length() > 200}">
-                                           <span>${currentActor.bio.substring(0,200)} ... </span>
+                                        <g:if test="${currentActor.bio?.length() > 200}">
+                                           <span>${currentActor.bio?.substring(0,200)} ... </span>
                                         </g:if>
                                         <g:else>
                                             <span>${currentActor.bio}</span>

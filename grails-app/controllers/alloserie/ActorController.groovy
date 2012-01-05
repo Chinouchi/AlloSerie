@@ -11,11 +11,6 @@ class ActorController {
         redirect(url:"../", params: params)
     }
 
-    def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [actorInstanceList: Actor.list(params), actorInstanceTotal: Actor.count()]
-    }
-
     def create = {
         def actorInstance = new Actor()
         actorInstance.properties = params
@@ -35,14 +30,14 @@ class ActorController {
 
         if (actorInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'actor.label', default: 'Actor'), actorInstance.id])}"
-            redirect(action: "show", id: actorInstance.id)
+            redirect(action: "display", id: actorInstance.id)
         }
         else {
             render(view: "create", model: [actorInstance: actorInstance])
         }
     }
 
-    def show = {
+    def display = {
         def actorInstance = Actor.get(params.id)
         if (!actorInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
@@ -57,7 +52,7 @@ class ActorController {
         def actorInstance = Actor.get(params.id)
         if (!actorInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "index")
         }
         else {
             return [actorInstance: actorInstance]
@@ -79,7 +74,7 @@ class ActorController {
             actorInstance.properties = params
             if (!actorInstance.hasErrors() && actorInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'actor.label', default: 'Actor'), actorInstance.id])}"
-                redirect(action: "show", id: actorInstance.id)
+                redirect(action: "display", id: actorInstance.id)
             }
             else {
                 render(view: "edit", model: [actorInstance: actorInstance])
@@ -87,7 +82,7 @@ class ActorController {
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "index")
         }
     }
 
@@ -97,11 +92,11 @@ class ActorController {
             try {
                 actorInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-                redirect(action: "list")
+                redirect(action: "index")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'actor.label', default: 'Actor'), params.id])}"
-                redirect(action: "show", id: params.id)
+                redirect(action: "display", id: params.id)
             }
         }
         else {

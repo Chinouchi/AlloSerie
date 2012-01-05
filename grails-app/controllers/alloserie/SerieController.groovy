@@ -22,11 +22,6 @@ class SerieController {
         }
     }
 
-    def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [serieInstanceList: Serie.list(params), serieInstanceTotal: Serie.count()]
-    }
-
     def create = {
         def serieInstance = new Serie()
         serieInstance.properties = params
@@ -48,7 +43,7 @@ class SerieController {
             redirect(action: "display", id: serieInstance.id)
         }
         else {
-            render(view: "create", model: [serieInstance: serieInstance])
+            redirect(url:"../", params : params)
         }
     }
 
@@ -100,7 +95,7 @@ class SerieController {
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
-                redirect(action: "show", id: params.id)
+                redirect(action: "display", id: params.id)
             }
         }
         else {
