@@ -8,6 +8,7 @@
 </head>
 
   <body>
+  <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
      <ul class="tabs">
         <li><a href="#">Resume</a></li>
         <li><a href="#">Series</a></li>

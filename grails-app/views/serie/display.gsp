@@ -8,12 +8,14 @@
 </head>
 
   <body>
+  <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
      <ul class="tabs">
         <li><a href="#">Resume</a></li>
         <li><a href="#">Actors</a></li>
        <g:if test="${session.getAttribute('user') != null}">
            <li><a href="#">Administration</a></li>
        </g:if>
+
     </ul>
     <div class="panes">
         <div>

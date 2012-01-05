@@ -41,24 +41,23 @@
                                                <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
                                                <g:set var="i" value="${i++}" />
 
-                                                <g:if test="${i == 5}">
-                                                    <g:set var="i" value="0"/>
-                                                    </div>
-                                                </g:if>
-
-                                           </g:each>
-                                           <g:if test="${i != 5}">
-                                              </div>
-                                           </g:if>
-                                </div>
-
-                                <!-- "next page" action -->
-                         <a class="next browse right"></a>
+            <!-- 1-5 -->
+                <g:set var="i" value="${0}"/>
+                <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
+                    <g:if test="${i == 4}">
+                        <g:set var="i" value="${0}"/>
                         </div>
-                    </fieldset>
-            </div>
+
+                    </g:if>
+
+                    <g:if test="${i == 0}">
+                        <div class="test">
+                    </g:if>
 
 
+                    <g:link controller="serie" action="display" id="${bestSerie.id}">
+
+                        <img src="${resource(dir: "images", file: bestSerie.imagePath)}" alt="">
 
         <!-- onglets contenue 2-->
             <div>
@@ -88,32 +87,7 @@
                 </g:each>
             </div>
 
-            <div>
-                <g:each in="${Actor.findAll()}" var="currentActor">
-                    <table class="acteurs">
-                          <thead >
-                            <th colspan="2"><g:link controller="actor" action="display" id="${currentActor.id}">${currentActor.fullName}</g:link></th>
-                           </thead>
-                        <tbody>
-                            <tr>
-                                <td width="15%"><img src="${resource(dir:"images", file:currentActor.imagePath)}" alt=""></td>
-                                    <td>
-                                        <span><strong>Prénom :</strong> ${currentActor.firstName}</span><br />
-                                        <span><strong>Nom :</strong> ${currentActor.lastName}</span><br />
-                                        <span><strong>Date de naissance :</strong> ${currentActor.birthDate.toLocaleString()}</span><br />
-                                        <span><strong>Biographie :</strong></span><br/>
-                                        <g:if test="${currentActor.bio?.length() > 200}">
-                                           <span>${currentActor.bio?.substring(0,200)} ... </span>
-                                        </g:if>
-                                        <g:else>
-                                            <span>${currentActor.bio}</span>
-                                        </g:else>
-                                    </td>
-                            </tr>
-                         </tbody>
-                    </table>
-                </g:each>
-            </div>
+        </div>
 
             <g:if test="${session.getAttribute('user') != null}">
                 <div id="administrationTab">
