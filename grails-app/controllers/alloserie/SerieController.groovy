@@ -45,7 +45,7 @@ class SerieController {
 
         if (serieInstance.save(flush: true)){
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
-            redirect(action: "show", id: serieInstance.id)
+            redirect(action: "display", id: serieInstance.id)
         }
         else {
             render(view: "create", model: [serieInstance: serieInstance])

@@ -19,11 +19,48 @@
         <div class="panes">
             <div>
                 <fieldset id="news" title="News" > <legend>News :</legend></fieldset>
-                <div id="fieldtv">
-                    <fieldset id="toptv" title="Top TV Shows" > <legend>Top TV Shows :</legend></fieldset>
-                    <fieldset id="todaytv"title="Today Show" > <legend>Today Show :</legend></fieldset>
+
+                    <fieldset id="toptv" title="Top TV Shows" > <legend>Top TV Shows :</legend>
+                         <div class="toptvscroll">
+                        <a class="prev browse left"></a>
+
+                                <!-- root element for scrollable -->
+                                <div class="scrollable">
+
+                                   <!-- root element for the items -->
+                                   <div class="items">
+
+                                      <!-- 1-5 -->
+                                                <% int i = 0%>
+                                           <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
+
+                                               <% if(i == 0){%>
+                                               <div>
+                                                          <% }%>
+                                                <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
+ <% i ++   %>
+
+                                                <% if(i == 5){
+                                                   i = 0%>
+                                               </div>
+                                                          <% }%>
+
+                                           </g:each>
+                                                 <% if(i!=5){%>
+                                                    </div>
+                                                <%}%>
+
+                                   </div>
+
+                                </div>
+
+                                <!-- "next page" action -->
+                         <a class="next browse right"></a>
+                        </div>
+                    </fieldset>
+
                 </div>
-	        </div>
+
 
         <!-- onglets contenue 2-->
             <div>

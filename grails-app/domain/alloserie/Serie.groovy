@@ -17,6 +17,8 @@ class Serie {
     short rating
     String imagePath
 
+
+
     static constraints = {
         name(nullable: false, minSize: 2)
         description(nullable: true , maxSize: 15000)
