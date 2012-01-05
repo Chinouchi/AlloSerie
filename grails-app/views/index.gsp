@@ -35,19 +35,19 @@
                                            <%! int i = 0%>
                                            <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
 
-                                               <g:if test="{i == 0}">
+                                               <g:if test="${i == 0}">
                                                  <div>
                                                </g:if>
                                                <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
                                                 <% i ++  %>
 
-                                                <g:if test="{i == 5}">
+                                                <g:if test="${i == 5}">
                                                 <% i = 0 %>
                                                </div>
                                                 </g:if>
 
                                            </g:each>
-                                           <g:if test="{i != 5}">
+                                           <g:if test="${i != 5}">
                                               </div>
                                            </g:if>
 
