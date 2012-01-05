@@ -42,24 +42,22 @@
                                                <g:set var="i" value="${i++}" />
 
                                                 <g:if test="${i == 5}">
-                                                <g:set var="i" value="0"/>
-                                               </div>
+                                                    <g:set var="i" value="0"/>
+                                                    </div>
                                                 </g:if>
 
                                            </g:each>
                                            <g:if test="${i != 5}">
                                               </div>
                                            </g:if>
-
-                                   </div>
+                                </div>
 
                                 <!-- "next page" action -->
                          <a class="next browse right"></a>
                         </div>
                     </fieldset>
+            </div>
 
-                </div>
-        </div>
 
 
         <!-- onglets contenue 2-->
@@ -94,7 +92,7 @@
                 <g:each in="${Actor.findAll()}" var="currentActor">
                     <table class="acteurs">
                           <thead >
-                            <th colspan="2"><a href="${createLink(controller:'actor', action:'display', id:currentActor.id)}">${currentActor.fullName}</a></th>
+                            <th colspan="2"><g:link controller="actor" action="display" id="${currentActor.id}">${currentActor.fullName}</g:link></th>
                            </thead>
                         <tbody>
                             <tr>

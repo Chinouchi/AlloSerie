@@ -5,11 +5,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        if(session.getAttribute("user") == null)
-        {
-            redirect(action:"signin", params: params)
-        }
-        redirect(action: "list", params: params)
+        redirect(controller: "home", action: "index", params: params)
     }
 
     def list = {
@@ -146,7 +142,7 @@ class UserController {
     }
     def signout = {
         session.removeAttribute('user')
-        render(view: "../index")
+        render(view: "/home/index")
     }
 }
 
