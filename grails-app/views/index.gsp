@@ -32,17 +32,17 @@
                                    <div class="items">
 
                                       <!-- 1-5 -->
-                                           <%! int i = 0%>
+                                           <g:set var="i" value="0"/>
                                            <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
 
                                                <g:if test="${i == 0}">
                                                  <div>
                                                </g:if>
                                                <img src="${resource(dir:"images", file:bestSerie.imagePath)}" alt="">
-                                                <% i ++  %>
+                                               <g:set var="i" value="${i++}" />
 
                                                 <g:if test="${i == 5}">
-                                                <% i = 0 %>
+                                                <g:set var="i" value="0"/>
                                                </div>
                                                 </g:if>
 
@@ -53,14 +53,13 @@
 
                                    </div>
 
-                                </div>
-
                                 <!-- "next page" action -->
                          <a class="next browse right"></a>
                         </div>
                     </fieldset>
 
                 </div>
+        </div>
 
 
         <!-- onglets contenue 2-->
