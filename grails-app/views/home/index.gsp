@@ -4,6 +4,7 @@
     <title>Welcome to AlloSeries</title>
     <meta name="layout" content="main"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'Scrollbar.css')}"/>
+
 </head>
 
 <body>
@@ -13,14 +14,13 @@
     <li><a href="#">Series</a></li>
     <li><a href="#">Acteurs</a></li>
     <g:if test="${session.getAttribute('user') != null}">
-        <li><a href="#admin">Administration</a></li>
+        <li><a href="#">Administration</a></li>
     </g:if>
 </ul>
 
 <!-- onglets contenue 1 -->
 <div class="panes">
-    <div>
-        <fieldset id="toptv" title="Top Tv Show">
+    <div><fieldset id="toptv" title="Top Tv Show">
         <legend>Top TV SHOW :</legend>
 
         <div id="test">
@@ -71,15 +71,15 @@
 
     <fieldset id="news" title="News"><legend>News :</legend>
         <g:set var="nbNews" value="${0}"/>
-        <g:each in="${News.findAll(sort:'dateCommentaire' , order:'desc')}" var="lastNew">
-            <g:if test="${nbNews <= 4}">
-                <div>
-                    <strong><g:formatDate format="dd-MM-yyyy" date="${lastNew.dateCommentaire}"/></strong>
-                    <spam>${lastNew.commentaire}</spam>
-                    <g:set var="nbNews" value="${nbNews+1}"/>
-                </div>
-            </g:if>
-        </g:each>
+      <g:each in="${News.findAll(sort:'dateCommentaire' , order:'desc')}" var="lastNew">
+          <g:if test="${nbNews <= 4}">
+          <div>
+              <strong> <g:formatDate format="dd-MM-yyyy" date="${lastNew.dateCommentaire}"/></strong>
+              <spam>${lastNew.commentaire}</spam>
+              <g:set var="nbNews" value="${nbNews+1}"/>
+          </div>
+        </g:if>
+      </g:each>
     </fieldset>
 
 </div>
@@ -98,8 +98,25 @@
             <tr>
                 <td width="15%"><img src="${resource(dir: "images", file: currentSerie.imagePath)}" alt=""></td>
                 <td>
-                    <span><strong>Genre(s) :</strong> ${currentSerie.genre}</span><br/>
-                    <span><strong>Notation :</strong> ${currentSerie.rating}</span><br/>
+                    <span><strong>Type :</strong> ${currentSerie.genre}</span><br/>
+                              <g:if test="${currentSerie.rating == 0}" >
+                              <span> <strong> Rating : </strong> <img src="${resource(dir:"images", "/zero_star.png")}" alt=""> </span>  <br />
+                              </g:if>
+                              <g:elseif test="${currentSerie.rating == 1}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/one_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${currentSerie.rating == 2}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/two_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${currentSerie.rating == 3}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/three_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${currentSerie.rating == 4}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/four_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${currentSerie.rating == 5}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/five_star.png")}" alt=""> </span>  <br />
+                              </g:elseif></span><br/>
                     <span><strong>Description :</strong></span>
                     <g:if test="${currentSerie.description?.length() > 200}">
                         <span>${currentSerie.description?.substring(0, 200)} ...</span>
@@ -128,9 +145,7 @@
                 <td>
                     <span><strong>Prénom :</strong> ${currentActor.firstName}</span><br/>
                     <span><strong>Nom :</strong> ${currentActor.lastName}</span><br/>
-                    <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy"
-                                                                            date="${currentActor.birthDate}"/>
-                    </span><br/>
+                    <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy" date="${currentActor.birthDate}"/></span><br/>
                     <span><strong>Biographie :</strong></span><br/>
                     <g:if test="${currentActor.bio?.length() > 200}">
                         <span>${currentActor.bio?.substring(0, 200)} ...</span>
@@ -149,14 +164,6 @@
     <div id="administrationTab">
         <fieldset>
             <legend>Ajouter une série</legend>
-            <g:if test="${flash.message}">
-                <div class="message">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${serieInstance}">
-                <div class="errors">
-                    <g:renderErrors bean="${serieInstance}" as="list"/>
-                </div>
-            </g:hasErrors>
             <g:uploadForm controller="serie" action="save">
                 <div class="dialog">
                     <table>
@@ -222,14 +229,6 @@
         </fieldset>
         <fieldset>
             <legend>Ajouter un auteur</legend>
-            <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${actorInstance}">
-            <div class="errors">
-                <g:renderErrors bean="${actorInstance}" as="list" />
-            </div>
-            </g:hasErrors>
             <g:uploadForm controller="actor" action="save">
                 <div class="dialog">
                     <table>
