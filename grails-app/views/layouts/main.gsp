@@ -3,6 +3,7 @@
     <head>
         <title><g:layoutTitle default="AlloSerie" /></title>
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'css',file:'Scrollbar.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>
@@ -21,18 +22,19 @@
         <g:javascript library="application" />
     </head>
     <body>
-        <div id="spinner" class="spinner" style="display:none;">
-            <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Loading..." />
+        <div class="MiddleBody">
+            <div id="spinner" class="spinner" style="display:none;">
+                <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Loading..." />
+            </div>
+            <div id="banner">
+                <g:if test="${session.getAttribute('user') != null}">
+                <div class="connexion_button"><g:link action="signout" controller="user">Se déconnecter</g:link></div></g:if>
+                <g:else>
+                    <div class="connexion_button"><g:link action="signin" controller="user">Se connecter</g:link></div>
+                </g:else>
+                <img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="0" />
+            </div>
+            <g:layoutBody />
         </div>
-        <div id="banner">
-            <g:if test="${session.getAttribute('user') != null}">
-            <div class="connexion_button"><g:link action="signout" controller="user">Se déconnecter</g:link></div></g:if>
-            <g:else>
-                <div class="connexion_button"><g:link action="signin" controller="user">Se connecter</g:link></div>
-            </g:else>
-            <img src="${resource(dir:'images',file:'banner.png')}" alt="Grails" border="0" />
-        </div>
-        <g:layoutBody />
-
     </body>
 </html>

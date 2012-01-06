@@ -17,8 +17,27 @@ body {
     font: 11px verdana, arial, helvetica, sans-serif;
     width: 1020px;
     margin: auto;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    height: 100%;
 
 }
+
+.MiddleBody{
+    background: #ffffff;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    position: absolute;
+    height: 100%;
+}
+
+.connexion_button{
+    text-align: right;
+    padding-right: 15px;
+
+}
+
+
 #grailsLogo {
 	padding:20px;
 }

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AlloSerie.iml" filepath="$PROJECT_DIR$/AlloSerie.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AlloSerie-grailsPlugins.iml" filepath="$PROJECT_DIR$/AlloSerie-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AlloSeries.iml" filepath="$PROJECT_DIR$/AlloSeries.iml" />
     </modules>
   </component>
 </project>
