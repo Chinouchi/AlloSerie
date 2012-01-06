@@ -20,6 +20,9 @@ class SerieController {
         else {
             [serieInstance: serieInstance]
         }
+
+
+
     }
 
 
