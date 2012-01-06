@@ -4,7 +4,6 @@
     <title>Welcome to AlloSeries</title>
     <meta name="layout" content="main"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'Scrollbar.css')}"/>
-
 </head>
 
 <body>
@@ -14,7 +13,7 @@
     <li><a href="#">Series</a></li>
     <li><a href="#">Acteurs</a></li>
     <g:if test="${session.getAttribute('user') != null}">
-        <li><a href="#">Administration</a></li>
+        <li><a href="#admin">Administration</a></li>
     </g:if>
 </ul>
 
@@ -66,7 +65,6 @@
 
         <!-- "page suivante" action -->
         <a class="next browse right"></a>
-    </div>
 </fieldset>
 
 

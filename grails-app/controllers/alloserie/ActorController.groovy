@@ -33,7 +33,7 @@ class ActorController {
             redirect(action: "display", id: actorInstance.id)
         }
         else {
-            redirect(controller:"home", action: "index", params : params, method:"post")
+            redirect(uri: params.toQueryString() + "#admin")
         }
     }
 

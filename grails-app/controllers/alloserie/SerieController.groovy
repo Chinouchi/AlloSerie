@@ -45,7 +45,7 @@ class SerieController {
             redirect(action: "display", id: serieInstance.id)
         }
         else {
-            redirect(controller:"home", action: "index", params : params, method:"post")
+            redirect(uri:params.toQueryString() + "#admin")
         }
     }
 
