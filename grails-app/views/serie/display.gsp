@@ -21,15 +21,32 @@
         <div>
             <table class="series">
                 <thead >
-                   <th colspan="2"> ${serieInstance?.name}</th>
+                   <th colspan="2"><strong>Nom : </strong> ${serieInstance?.name}</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td width="15%"><img src="${resource(dir:"images", file:serieInstance?.imagePath)}" alt=""></td>
                         <td>
-                            <span>${serieInstance?.genre}</span><br />
-                            <span>${serieInstance?.rating}</span>  <br />
-                            <span>${serieInstance?.description}</span>   <br />
+                            <span><strong> Type :</strong> ${serieInstance?.genre}</span><br />
+                              <g:if test="${serieInstance.rating == 0}" >
+                              <span> <strong> Rating : </strong> <img src="${resource(dir:"images", "/zero_star.png")}" alt=""> </span>  <br />
+                              </g:if>
+                              <g:elseif test="${serieInstance.rating == 1}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/one_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${serieInstance.rating == 2}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/two_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${serieInstance.rating == 3}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/three_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${serieInstance.rating == 4}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/four_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                              <g:elseif test="${serieInstance.rating == 5}" >
+                              <span><strong> Rating : </strong> <img src="${resource(dir:"images", "/five_star.png")}" alt=""> </span>  <br />
+                              </g:elseif>
+                            <span><strong> Desciption : </strong>${serieInstance?.description}</span>   <br />
                         </td>
                     </tr>
                  </tbody>
