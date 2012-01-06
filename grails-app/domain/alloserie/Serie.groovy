@@ -9,7 +9,8 @@ package alloserie
  * To change this template use File | Settings | File Templates.
  */
 class Serie {
-    static hasMany = [actors: Actor]
+    static hasMany = [actors: Actor, commentaires : Commentaire]
+
 
     String name
     String genre

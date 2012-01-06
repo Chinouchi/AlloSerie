@@ -51,6 +51,8 @@
                             <td>${fieldValue(bean: serieInstance, field: "imagePath")}</td>
                         
                             <td>${fieldValue(bean: serieInstance, field: "genre")}</td>
+
+
                         
                         </tr>
                     </g:each>

@@ -58,6 +58,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="serie.genre.label" default="Genre" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: serieInstance, field: "genre")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="serie.actors.label" default="Actors" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
@@ -71,9 +78,15 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="serie.genre.label" default="Genre" /></td>
+                            <td valign="top" class="name"><g:message code="serie.commentaires.label" default="Commentaires" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: serieInstance, field: "genre")}</td>
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${serieInstance.commentaires}" var="c">
+                                    <li><g:link controller="commentaire" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
                             
                         </tr>
                     

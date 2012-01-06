@@ -12,6 +12,7 @@
      <ul class="tabs">
         <li><a href="#">Resume</a></li>
         <li><a href="#">Actors</a></li>
+        <li><a href="#">Commantaires</a></li>
        <g:if test="${session.getAttribute('user') != null}">
            <li><a href="#">Administration</a></li>
        </g:if>
@@ -30,6 +31,7 @@
                             <span>${serieInstance?.genre}</span><br />
                             <span>${serieInstance?.rating}</span>  <br />
                             <span>${serieInstance?.description}</span>   <br />
+                            <span>${serieInstance?.commentaires}</span>   <br />
                         </td>
                     </tr>
                  </tbody>
@@ -59,6 +61,71 @@
                      </tbody>
                 </table>
             </g:each>
+        </div>
+        <div>
+            <table class="Commentaires">
+                <tbody>
+                    <tr>
+                        <td>
+                               <g:each in="${serieInstance?.commentaires}" var="c">
+                                  <div class="conteneur">
+                                   <span><strong>${c?.Auteur}</strong></span> <br/> <br/>
+
+                                   <p>${c?.Comment}</p>
+                                   <br/>
+                                   <span><i>${c?.date}</i></span>
+                                   <br/>
+
+                                   </div>
+
+                                   <div  class="separator">----------------------------------</div>
+                               </g:each>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <g:form action="save" controller="commentaire">
+                                <div class="dialog">
+                                    <table>
+                                        <tbody>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="auteur"><g:message code="commentaire.auteur.label" default="Auteur"/></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: commentaireInstance, field: 'auteur', 'errors')}">
+                                                <g:textField name="auteur" value="${commentaireInstance?.auteur}"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="prop">
+                                            <td valign="top" class="name">
+                                                <label for="comment"><g:message code="commentaire.comment.label" default="Comment"/></label>
+                                            </td>
+                                            <td valign="top" class="value ${hasErrors(bean: commentaireInstance, field: 'comment', 'errors')}">
+                                                <g:textArea cols="0" rows="0" name="comment" value="${commentaireInstance?.comment}"/>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <g:hiddenField name="idSerie" value="${params['id']}"/>
+
+                                <div class="buttons">
+                                    <span class="button"><g:submitButton name="create" class="save"
+                                                                         value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+                                </div>
+                            </g:form>
+                        </td>
+                    </tr>
+                 </tbody>
+            </table>
         </div>
         <div>
             <g:uploadForm method="post" >
@@ -112,6 +179,7 @@
                                     <g:textField name="genre" value="${serieInstance?.genre}" />
                                 </td>
                             </tr>
+
 
                         </tbody>
                     </table>

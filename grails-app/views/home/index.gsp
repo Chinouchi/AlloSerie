@@ -65,7 +65,6 @@
 
         <!-- "page suivante" action -->
         <a class="next browse right"></a>
-</div>
     </fieldset>
 
 
