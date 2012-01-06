@@ -19,7 +19,7 @@
     </ul>
     <div class="panes">
         <div>
-            <table class="serieAlone">
+            <table class="series">
                 <thead >
                    <th colspan="2"> ${serieInstance?.name}</th>
                 </thead>

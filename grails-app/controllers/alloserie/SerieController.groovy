@@ -22,6 +22,8 @@ class SerieController {
         }
     }
 
+
+
     def create = {
         def serieInstance = new Serie()
         serieInstance.properties = params
