@@ -66,22 +66,22 @@
 
         <!-- "page suivante" action -->
         <a class="next browse right"></a>
-</div>
-    </fieldset>
+    </div>
+</fieldset>
 
 
 
     <fieldset id="news" title="News"><legend>News :</legend>
         <g:set var="nbNews" value="${0}"/>
-      <g:each in="${News.findAll(sort:'dateCommentaire' , order:'desc')}" var="lastNew">
-          <g:if test="${nbNews <= 4}">
-          <div>
-              <strong> <g:formatDate format="dd-MM-yyyy" date="${lastNew.dateCommentaire}"/></strong>
-              <spam>${lastNew.commentaire}</spam>
-              <g:set var="nbNews" value="${nbNews+1}"/>
-          </div>
-        </g:if>
-      </g:each>
+        <g:each in="${News.findAll(sort:'dateCommentaire' , order:'desc')}" var="lastNew">
+            <g:if test="${nbNews <= 4}">
+                <div>
+                    <strong><g:formatDate format="dd-MM-yyyy" date="${lastNew.dateCommentaire}"/></strong>
+                    <spam>${lastNew.commentaire}</spam>
+                    <g:set var="nbNews" value="${nbNews+1}"/>
+                </div>
+            </g:if>
+        </g:each>
     </fieldset>
 
 </div>
@@ -130,7 +130,9 @@
                 <td>
                     <span><strong>Prénom :</strong> ${currentActor.firstName}</span><br/>
                     <span><strong>Nom :</strong> ${currentActor.lastName}</span><br/>
-                    <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy" date="${currentActor.birthDate}"/></span><br/>
+                    <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy"
+                                                                            date="${currentActor.birthDate}"/>
+                    </span><br/>
                     <span><strong>Biographie :</strong></span><br/>
                     <g:if test="${currentActor.bio?.length() > 200}">
                         <span>${currentActor.bio?.substring(0, 200)} ...</span>
@@ -149,6 +151,14 @@
     <div id="administrationTab">
         <fieldset>
             <legend>Ajouter une série</legend>
+            <g:if test="${flash.message}">
+                <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${serieInstance}">
+                <div class="errors">
+                    <g:renderErrors bean="${serieInstance}" as="list"/>
+                </div>
+            </g:hasErrors>
             <g:uploadForm controller="serie" action="save">
                 <div class="dialog">
                     <table>
@@ -214,6 +224,14 @@
         </fieldset>
         <fieldset>
             <legend>Ajouter un auteur</legend>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${actorInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${actorInstance}" as="list" />
+            </div>
+            </g:hasErrors>
             <g:uploadForm controller="actor" action="save">
                 <div class="dialog">
                     <table>

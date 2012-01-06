@@ -33,7 +33,7 @@ class ActorController {
             redirect(action: "display", id: actorInstance.id)
         }
         else {
-            render(view: "create", model: [actorInstance: actorInstance])
+            redirect(controller:"home", action: "index", params : params, method:"post")
         }
     }
 
