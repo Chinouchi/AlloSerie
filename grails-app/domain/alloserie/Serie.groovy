@@ -17,14 +17,11 @@ class Serie {
     short rating
     String imagePath
 
-
-
     static constraints = {
-        name(nullable: false, minSize: 2)
-        description(nullable: true , maxSize: 15000)
-        rating(nullable: true, min : (short)0, max: (short)5)
+        name(nullable: false, blank:false, minSize: 2)
+        description(nullable: true , maxSize: 15000, blank: false)
+        rating(nullable: true, min : (short)0, max: (short)5, blank:false)
         imagePath(nullable: true)
-        //genre( inList: ["Comedie", "Policiere", "Dramatique", "Science-Fiction", "Fantaisie" , "Ado"])
+        genre(blank:false)
     }
-
 }

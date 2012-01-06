@@ -8,7 +8,7 @@ class ActorController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        redirect(url:"../", params: params)
+        redirect(controller: "home", action: "index")
     }
 
     def create = {

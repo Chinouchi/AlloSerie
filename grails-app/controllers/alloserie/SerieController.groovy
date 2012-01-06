@@ -8,7 +8,7 @@ class SerieController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index = {
-        redirect(url: "../", params: params)
+        redirect(controller: "home", action: "index", params: params)
     }
 
     def display = {
@@ -38,12 +38,12 @@ class SerieController {
             serieInstance.imagePath = "series/" + newFileName
         }
 
-        if (serieInstance.save(flush: true)){
+        if (serieInstance.save(flush: true, validate : true)){
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
             redirect(action: "display", id: serieInstance.id)
         }
         else {
-            redirect(url:"../", params : params)
+            redirect(controller:"home", action: "index", params : params, method:"post")
         }
     }
 
@@ -91,7 +91,7 @@ class SerieController {
             try {
                 serieInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
-                redirect(action: "list")
+                redirect(action: "index")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
@@ -100,7 +100,7 @@ class SerieController {
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'serie.label', default: 'Serie'), params.id])}"
-            redirect(action: "list")
+            redirect(action: "index")
         }
     }
 }
