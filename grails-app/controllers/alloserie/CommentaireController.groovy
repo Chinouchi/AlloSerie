@@ -29,7 +29,7 @@ class CommentaireController {
             redirect(controller: "serie", action: "display", id: commentaireInstance.id)
         }
         else {
-            render(view: "create", model: [commentaireInstance: commentaireInstance])
+            render(view: "display", model: [commentaireInstance: commentaireInstance])
         }
     }
 
