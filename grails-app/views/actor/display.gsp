@@ -28,7 +28,7 @@
                         <td>
                             <span><strong>Prénom :</strong> ${actorInstance.firstName}</span><br />
                             <span><strong>Nom :</strong> ${actorInstance.lastName}</span><br />
-                            <span><strong>Date de naissance :</strong> ${actorInstance.birthDate.toLocaleString()}</span><br />
+                            <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy" date="${actorInstance.birthDate}"/> </span><br />
                             <span><strong>Biographie :</strong></span><br/>
                             <g:if test="${actorInstance.bio?.length() > 200}">
                                <span>${actorInstance.bio?.substring(0,200)} ... </span>

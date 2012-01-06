@@ -20,20 +20,20 @@
 
 <!-- onglets contenue 1 -->
 <div class="panes">
-
-    <div><fieldset id="toptv" title="Top Tv Show"><legend>Top TV SHOW :</legend>
+    <div><fieldset id="toptv" title="Top Tv Show">
+        <legend>Top TV SHOW :</legend>
 
         <div id="test">
-            <!-- "previous page" action -->
+            <!-- action precedent  -->
             <a class="prev browse left"></a>
 
-            <!-- root element for scrollable -->
+            <!-- Noeud pour le JQuerytool -->
             <div class="scrollable" id=scroller>
 
-                <!-- root element for the items -->
+                <!--Noeud -->
             <div class="items">
 
-            <!-- 1-5 -->
+            <!-- 1-4 -->
                 <g:set var="i" value="${0}"/>
                 <g:each in="${Serie.findAll().sort {a,b-> b.rating.compareTo(a.rating)}}" var="bestSerie">
                     <g:if test="${i == 4}">
@@ -65,16 +65,21 @@
 
         <!-- "page suivante" action -->
         <a class="next browse right"></a>
-    </div>
-</fieldset>
+</div>
+    </fieldset>
+
+
 
     <fieldset id="news" title="News"><legend>News :</legend>
-      <g:each in="${News.findAll()}" var="lastNew">
+        <g:set var="nbNews" value="${0}"/>
+      <g:each in="${News.findAll(sort:'dateCommentaire' , order:'desc')}" var="lastNew">
+          <g:if test="${nbNews <= 4}">
           <div>
-              <strong> <g:formatDate format="yyyy-MM-dd" date="${lastNew.dateCommentaire}"/></strong>
+              <strong> <g:formatDate format="dd-MM-yyyy" date="${lastNew.dateCommentaire}"/></strong>
               <spam>${lastNew.commentaire}</spam>
+              <g:set var="nbNews" value="${nbNews+1}"/>
           </div>
-
+        </g:if>
       </g:each>
     </fieldset>
 
@@ -82,7 +87,7 @@
 
 
 
-<!-- onglets contenue 2-->
+<!-- onglet contenue 2-->
 <div>
     <g:each in="${Serie.findAll()}" var="currentSerie">
         <table class="series">
@@ -124,7 +129,7 @@
                 <td>
                     <span><strong>Prénom :</strong> ${currentActor.firstName}</span><br/>
                     <span><strong>Nom :</strong> ${currentActor.lastName}</span><br/>
-                    <span><strong>Date de naissance :</strong> ${currentActor.birthDate.toLocaleString()}</span><br/>
+                    <span><strong>Date de naissance :</strong><g:formatDate format="dd-MM-yyyy" date="${currentActor.birthDate}"/></span><br/>
                     <span><strong>Biographie :</strong></span><br/>
                     <g:if test="${currentActor.bio?.length() > 200}">
                         <span>${currentActor.bio?.substring(0, 200)} ...</span>
@@ -138,7 +143,7 @@
         </table>
     </g:each>
 </div>
-<!-- onglets contenue 3-->
+<!-- onglet contenue 3-->
 <g:if test="${session.getAttribute('user') != null}">
     <div id="administrationTab">
         <fieldset>
