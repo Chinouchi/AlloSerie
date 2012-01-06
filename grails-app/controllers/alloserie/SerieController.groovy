@@ -45,10 +45,17 @@ class SerieController {
 
         if (serieInstance.save(flush: true, validate : true)){
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
+
+             News nouvelle = new News()
+                nouvelle.dateCommentaire = new Date()
+                nouvelle.version = 1
+                nouvelle.commentaire = "La serie ${serieInstance.name} a été crée"
+                nouvelle.save()
+
             redirect(action: "display", id: serieInstance.id)
         }
         else {
-            redirect(controller:"home", action: "index", params : params, method:"post")
+            redirect(uri:params.toQueryString() + "#admin")
         }
     }
 
@@ -78,6 +85,15 @@ class SerieController {
             serieInstance.properties = params
             if (!serieInstance.hasErrors() && serieInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
+                //ajout de la news
+
+                News nouvelle = new News()
+                nouvelle.dateCommentaire = new Date()
+                nouvelle.version = 1
+                nouvelle.commentaire = "La serie ${serieInstance.name} a été mis a jour"
+                nouvelle.save()
+
+
                 redirect(action: "display", id: serieInstance.id)
             }
             else {

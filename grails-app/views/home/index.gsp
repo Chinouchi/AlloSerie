@@ -14,13 +14,14 @@
     <li><a href="#">Series</a></li>
     <li><a href="#">Acteurs</a></li>
     <g:if test="${session.getAttribute('user') != null}">
-        <li><a href="#">Administration</a></li>
+        <li><a href="#admin">Administration</a></li>
     </g:if>
 </ul>
 
 <!-- onglets contenue 1 -->
 <div class="panes">
-    <div><fieldset id="toptv" title="Top Tv Show">
+    <div>
+        <fieldset id="toptv" title="Top Tv Show">
         <legend>Top TV SHOW :</legend>
 
         <div id="test">
@@ -65,7 +66,7 @@
 
         <!-- "page suivante" action -->
         <a class="next browse right"></a>
-    </fieldset>
+</fieldset>
 
 
 
@@ -147,6 +148,14 @@
     <div id="administrationTab">
         <fieldset>
             <legend>Ajouter une série</legend>
+            <g:if test="${flash.message}">
+                <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${serieInstance}">
+                <div class="errors">
+                    <g:renderErrors bean="${serieInstance}" as="list"/>
+                </div>
+            </g:hasErrors>
             <g:uploadForm controller="serie" action="save">
                 <div class="dialog">
                     <table>
@@ -212,6 +221,14 @@
         </fieldset>
         <fieldset>
             <legend>Ajouter un auteur</legend>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${actorInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${actorInstance}" as="list" />
+            </div>
+            </g:hasErrors>
             <g:uploadForm controller="actor" action="save">
                 <div class="dialog">
                     <table>
