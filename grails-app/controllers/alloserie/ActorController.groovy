@@ -74,6 +74,13 @@ class ActorController {
             actorInstance.properties = params
             if (!actorInstance.hasErrors() && actorInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'actor.label', default: 'Actor'), actorInstance.id])}"
+
+                News nouvelle = new News()
+                nouvelle.dateCommentaire = new Date()
+                nouvelle.version = 1
+                nouvelle.commentaire = "L'acteur ${actorInstance.firstName} a été mis a jour"
+                nouvelle.save()
+
                 redirect(action: "display", id: actorInstance.id)
             }
             else {

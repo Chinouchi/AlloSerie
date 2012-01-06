@@ -20,7 +20,8 @@
 
 <!-- onglets contenue 1 -->
 <div class="panes">
-    <div><fieldset id="toptv" title="Top Tv Show">
+    <div>
+        <fieldset id="toptv" title="Top Tv Show">
         <legend>Top TV SHOW :</legend>
 
         <div id="test">

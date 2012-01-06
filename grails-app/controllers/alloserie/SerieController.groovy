@@ -75,6 +75,15 @@ class SerieController {
             serieInstance.properties = params
             if (!serieInstance.hasErrors() && serieInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'serie.label', default: 'Serie'), serieInstance.id])}"
+                //ajout de la news
+
+                News nouvelle = new News()
+                nouvelle.dateCommentaire = new Date()
+                nouvelle.version = 1
+                nouvelle.commentaire = "La serie ${serieInstance.name} a été mis a jour"
+                nouvelle.save()
+
+
                 redirect(action: "display", id: serieInstance.id)
             }
             else {

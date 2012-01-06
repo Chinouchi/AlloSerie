@@ -47,7 +47,7 @@
                                 <td>
                                     <span>Prénom : ${currentActor.firstName}</span><br />
                                     <span>Nom : ${currentActor.lastName}</span><br />
-                                    <span>Date de naissance : ${currentActor.birthDate.toLocaleString()}</span><br />
+                                    <span>Date de naissance : <g:formatDate format="dd-MM-yyyy" date="${currentActor.birthDate}"/></span><br />
                                     <g:if test="${currentActor.bio.length() > 200}">
                                        <span>${currentActor.bio.substring(0,200)} ... </span>
                                     </g:if>
